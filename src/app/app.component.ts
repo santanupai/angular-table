@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MyserviceService } from '../app/myservice.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angulartable';
+  constructor(private myservice: MyserviceService) { }
+  title = 'angular table';
+  emplist: any;
+
+  ngOnInit() {
+    //showing data by using getData method
+    this.getData();
+  }
+
+  p: number = 1;
+    collection: any[];
+
+    //using myservice invoking the getapi method 
+  getData() {
+    this.myservice.getapi().subscribe(data => this.emplist = data.data);
+  }
+
 }
